@@ -20,7 +20,7 @@ class CustomUserTests(TestCase):
         User = get_user_model()
         admin_user = User.objects.create_superuser(
             username='superadmin', email='superadmin@email.com', password='123456'
-        )
+        )  # not just .create() like in regular models
 
         self.assertEqual(admin_user.username, 'superadmin')
         self.assertEqual(admin_user.email, 'superadmin@email.com')
