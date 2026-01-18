@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third-party
+    'crispy_forms',
+    'crispy_bootstrap5',
     # local
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig'
@@ -130,10 +133,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+# for built-in app - staticfiles 
+# it means that for local usage all static files are located 
+# at http://127.0.0.1:8000/static/
 STATIC_URL = 'static/'
+
+# set place in filesystem where to look for static files 
+STATICFILES_DIRS = [BASE_DIR / 'static'] 
+
+# place where all static files will endup after collectstatic execution
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# file storage engine used when collecting static files
+# with the collectstatic command
+# default - django.contrib.staticfiles.storage.StaticFilesStorage
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 # Login
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+
+# django-crispy-forms
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5' 
