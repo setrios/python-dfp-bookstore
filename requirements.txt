@@ -3,3 +3,4 @@ Django==6.0.1
 psycopg[binary]
 django-crispy-forms
 crispy-bootstrap5
+django-allauth

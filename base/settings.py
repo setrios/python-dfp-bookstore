@@ -37,13 +37,35 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # required by django-allauth | manages external site communication
     # third-party
     'crispy_forms',
     'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
     # local
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig'
 ]
+
+# django-allauth config
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # default django backend
+    'allauth.account.auth_backends.AuthenticationBackend',  # allauth backend
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # backend for sending emails
+
+ACCOUNT_LOGOUT_REDIRECT = 'home'  # overrides LOGOUT_REDIRECT_URL
+
+ACCOUNT_SESSION_REMEMBER = True  # disable Remember Me checkbox | always remember the user
+
+ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_AUTHENTICATION_METHOD = "email" # new
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -53,6 +75,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware', 
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
