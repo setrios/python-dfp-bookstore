@@ -61,15 +61,22 @@ AUTHENTICATION_BACKENDS = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # backend for sending emails
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # for real email sending
+# next configure 
+# EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_USE_TLS 
+# based on the instructions from email provider as environment variables.
 
 ACCOUNT_LOGOUT_REDIRECT = 'home'  # overrides LOGOUT_REDIRECT_URL
 
 ACCOUNT_SESSION_REMEMBER = True  # disable Remember Me checkbox | always remember the user
 
-ACCOUNT_USERNAME_REQUIRED = False # new
-ACCOUNT_AUTHENTICATION_METHOD = "email" # new
-ACCOUNT_EMAIL_REQUIRED = True # new
-ACCOUNT_UNIQUE_EMAIL = True # new
+ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+
+DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
+
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 

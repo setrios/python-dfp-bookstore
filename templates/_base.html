@@ -42,7 +42,7 @@
                     {% endif %}
                     {% if user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+                        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
                     </li>
                     {% endif %}
                 </ul>
