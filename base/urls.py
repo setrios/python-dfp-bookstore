@@ -25,5 +25,6 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     # local apps
     # path('accounts/', include('accounts.urls')),  # for signup | below - important!
-    path('', include('pages.urls'))
+    path('', include('pages.urls')),
+    path('books/', include('books.urls'))
 ]

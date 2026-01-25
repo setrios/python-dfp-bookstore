@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'allauth.account',
     # local
     'accounts.apps.AccountsConfig',
-    'pages.apps.PagesConfig'
+    'pages.apps.PagesConfig',
+    'books.apps.BooksConfig'
 ]
 
 # django-allauth config
