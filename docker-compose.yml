@@ -16,7 +16,7 @@ services:
   db:
     image: postgres:18
     volumes:
-      - postgres_data:/var/lib/postgres
+      - postgres_data:/var/lib/postgresql  # correct path for psql data
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
 
