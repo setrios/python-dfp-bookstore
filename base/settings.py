@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DJANGO_DEBUG')
+DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']   # as debug is False
 
 
 # Application definition
@@ -72,13 +72,17 @@ ACCOUNT_LOGOUT_REDIRECT = 'home'  # overrides LOGOUT_REDIRECT_URL
 
 ACCOUNT_SESSION_REMEMBER = True  # disable Remember Me checkbox | always remember the user
 
-ACCOUNT_USERNAME_REQUIRED = False 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
+# depracated settings - use ACCOUNT_LOGIN_METHODS instead
+# ACCOUNT_USERNAME_REQUIRED = False 
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+
 ACCOUNT_UNIQUE_EMAIL = True
 
 DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
-
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -143,7 +147,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 # as dj-database-url in use
 DATABASES = {
-	"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
+	'default': env.dj_db_url('DATABASE_URL', default='postgres://postgres@db/postgres')
 }
 
 
@@ -224,4 +228,18 @@ MEDIA_ROOT = BASE_DIR / 'media'
 import socket
 
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+INTERNAL_IPS = [ip[:-1] + '1' for ip in ips]
+
+
+# SSL/HTTPS settings
+
+SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
+SECURE_HSTS_SECONDS = env.int('DJANGO_SECURE_HSTS_SECONDS', default=2592000) # 30 days
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
+SECURE_HSTS_PRELOAD = env.bool('DJANGO_SECURE_HSTS_PRELOAD', default=True)
+
+
+# Cookie Security
+
+SESSION_COOKIE_SECURE = env.bool('DJANGO_SESSION_COOKIE_SECURE', default=True)
+CSRF_COOKIE_SECURE = env.bool('DJANGO_CSRF_COOKIE_SECURE', default=True)
