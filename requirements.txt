@@ -7,3 +7,5 @@ django-allauth==65.14.0
 environs[django]==14.5.0
 pillow
 django-debug-toolbar
+whitenoise
+gunicorn
